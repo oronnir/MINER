@@ -1,7 +1,15 @@
-# MINER
+# MINER: Modeling Inter- and Intra-Person Variance for Re-Identification
+Oron Nir, Eliyahu Strugo, Ariel Shamir
+
+## Abstract
+Clothes-Changing Person Re-Identification (CC-ReID) is a long-standing and challenging task due to drastic appearance shifts across outfits. 
+Most prior works devise biometric signal extraction heuristics to enhance inter-person variance, e.g., using segmentation masks, while the intra-person variance is usually left uncontrolled.
+We present MINER, a model-agnostic framework to directly contrast hard examples and suppress garment biases.
+Extensive experiments show that controlled simultaneous intra- and inter-person variance outperforms the state of the art on seven CC-ReID and Visible-Infrared ReID datasets.
+We further demonstrate the importance of balancing these factors, which vary with the dataset priors.
 
 
-# MINER Pipeline for TVRID RGB Track
+# MINER Pipeline for ICPR 2026 TVRID RGB-RGB Track
 
 ## Step 0: Pre-compute Embeddings (one-time)
 
