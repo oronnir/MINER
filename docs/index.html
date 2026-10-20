@@ -10,6 +10,10 @@
   <meta property="og:description" content="Recognizing identity beyond clothing. Adaptive variance-aware hard mining for clothes-changing person re-identification." />
   <meta property="og:url" content="https://oronnir.github.io/MINER/" />
   <title>MINER — WACV 2027 · Person Reidentification</title>
+  <!-- Custom MINER miner-mascot favicon for browser tabs and saved bookmarks -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -25,7 +29,8 @@
     .top{position:sticky;top:0;z-index:50;background:rgba(6,24,31,.93);color:#fff;border-bottom:1px solid rgba(255,255,255,.09);backdrop-filter:blur(20px)}
     .nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
     .brand{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-size:19px;letter-spacing:-.08em;font-weight:800}
-    .logo-mark{display:inline-grid;grid-template-columns:repeat(3,6px);align-items:end;gap:3px;height:25px;transform:skew(-15deg)}.logo-mark i{display:block;width:6px;background:var(--mint);border-radius:2px}.logo-mark i:nth-child(1){height:12px}.logo-mark i:nth-child(2){height:23px}.logo-mark i:nth-child(3){height:17px}
+    .mascot-mark{display:block;object-fit:contain;width:38px;height:38px;flex:0 0 auto;filter:drop-shadow(0 2px 8px rgba(110,225,175,.12))}
+    .foot .mascot-mark{width:34px;height:34px}
     .navlinks{display:flex;gap:34px;align-items:center;color:#b1c5c7;font-size:12px;font-weight:700}.navlinks a:hover,.navlinks a:focus-visible{color:#fff}
     .navright{display:flex;gap:14px;align-items:center}.confpill{border:1px solid rgba(189,244,160,.45);border-radius:100px;padding:9px 15px;color:var(--mint);font-size:10px;font-weight:800;letter-spacing:.12em;white-space:nowrap}
     .hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 55% 75% at 86% 48%,#15433d 0%,transparent 70%),radial-gradient(ellipse 70% 100% at 5% 90%,#17323b 0%,transparent 70%),var(--navy);color:#fff}
@@ -66,11 +71,51 @@
     @media(max-width:970px){.hero-inner{grid-template-columns:1fr;padding-top:65px;padding-bottom:75px;gap:52px}.hero-art{max-width:620px;margin:0 auto;width:100%}.hero .hero-copy{max-width:800px}.navlinks{gap:17px}.abstract-layout{gap:35px}.video-layout{gap:30px}}
     @media(max-width:680px){.container{width:min(100% - 36px,var(--content))}.nav{min-height:64px}.navlinks{display:none}.confpill{font-size:9px;padding:8px 11px}.hero-inner{padding-top:51px;gap:45px}.hero-title{font-size:22px}.hero-summary{font-size:13px}h1{font-size:clamp(95px,23vw,150px);margin:20px 0}.hero-authors{font-size:11px}.actions{align-items:stretch}.action{padding:0 13px}.stats-wrap{grid-template-columns:repeat(2,1fr)}.stat{padding:22px 16px;border-bottom:1px solid rgba(255,255,255,.10)}.stat:first-child{padding-left:16px}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.stat b{font-size:23px}section.section{padding:72px 0}.abstract-layout,.method-grid,.results-layout,.video-layout{grid-template-columns:1fr}.abstract-copy{padding-left:20px}.abstract-copy p{font-size:15px}.section-header h2{font-size:36px}.method-card{min-height:unset;padding:25px}.method-num{margin-bottom:18px}.figure-frame{padding:13px}.figure-caption{display:block}.figure-caption span{display:block}.video-frame{min-height:210px}.foot-inner{align-items:flex-start;flex-direction:column;gap:20px}.cite-box pre{font-size:10px;padding-top:23px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+    /* Model weights download cards */
+    .weights-section{background:#0b2329;color:#fff;position:relative;overflow:hidden}
+    .weights-section:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 80% at 90% 20%,rgba(79,154,121,.14),transparent 70%);pointer-events:none}
+    .weights-section>.container{position:relative}
+    .weights-section .section-label{color:var(--mint)}
+    .weights-section .section-header h2{color:#f1f9f2}
+    .weights-section .section-header p{color:#b3c8c5}
+    .weights-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+    .weight-card{border:1px solid #35545a;background:#14343a;border-radius:11px;display:flex;flex-direction:column;gap:15px;padding:26px;min-width:0;transition:border-color .2s,transform .2s}
+    .weight-card:hover{border-color:#82b99c;transform:translateY(-2px)}
+    .weight-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .weight-card-icon{display:grid;place-items:center;width:43px;height:43px;border:1px solid #53776b;background:#1c4845;border-radius:9px;color:#bdf4a0;font-size:19px}
+    .weight-card-index{font-size:10px;letter-spacing:.14em;color:#8bb3a8;font-weight:800}
+    .weight-card h3{font-size:21px;letter-spacing:-.04em;color:#fff;margin:4px 0 0}
+    .weight-card .weight-description{font-size:12px;color:#a3bdb7;line-height:1.8;flex:1;margin:0}
+    .weight-meta{font-size:11px;color:#90b0aa;padding-top:12px;border-top:1px solid #315154}
+    .weight-link{display:inline-flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;background:var(--mint);color:#09221f;border-radius:5px;font-size:12px;font-weight:800;transition:background .15s}
+    .weight-link:hover{background:#d6ffc0}
+    .weight-link.pending{background:#244447;border:1px dashed #55726a;color:#9bb4ae;cursor:default}
+    .weight-link.pending:hover{background:#244447}
+    .weights-note{margin-top:23px;font-size:12px;color:#a0c0b4;line-height:1.8}
+    .weights-note a{color:var(--mint);text-decoration:underline;text-underline-offset:3px}
+    @media(max-width:900px){.weights-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:580px){.weights-grid{grid-template-columns:1fr}.weight-card{padding:23px}}
+  
+    /* Research affiliations — independent, unmodified institutional marks. */
+    .affiliation-strip{background:#f5f8f4;border-bottom:1px solid #dce6df}
+    .affiliation-inner{display:flex;align-items:center;justify-content:space-between;gap:38px;min-height:176px;padding-top:18px;padding-bottom:18px}
+    .affiliation-intro{display:flex;flex-direction:column;gap:3px;min-width:190px}
+    .affiliation-label{color:#477c68;font-weight:800;letter-spacing:.15em;font-size:10px}
+    .affiliation-hint{color:#6c807b;font-size:12px}
+    .affiliation-logos{display:flex;align-items:center;justify-content:space-between;gap:40px;flex:1;max-width:590px}
+    .affiliation-affix{display:flex;align-items:center;gap:18px;text-decoration:none;min-width:0;transition:opacity .2s}
+    .affiliation-affix:hover{opacity:.72}
+    .canvas-affix img{display:block;height:141px;width:112px;max-width:none;object-fit:contain;flex-shrink:0}
+    .affiliation-separator{width:1px;min-height:51px;background:#d5e0da}
+    .microsoft-affix img{display:block;width:185px;max-width:100%;height:auto;object-fit:contain}
+    @media(max-width:860px){.affiliation-inner{gap:20px;flex-wrap:wrap;justify-content:center;padding-top:27px;padding-bottom:27px}.affiliation-intro{text-align:center;width:100%}.affiliation-logos{flex:1 1 100%;justify-content:center;gap:45px;max-width:none}}
+    @media(max-width:580px){.affiliation-inner{gap:22px}.affiliation-logos{gap:14px;justify-content:space-around}.canvas-affix{gap:8px}.canvas-affix img{height:100px;width:80px;max-width:none}.affiliation-description{font-size:12px}.affiliation-description small{font-size:10px}.affiliation-separator{min-height:36px}.microsoft-affix img{width:130px}}
   </style>
 </head>
 <body>
   <!-- Set these links when public URLs become available: see the script at the bottom. -->
-  <header class="top"><nav class="container nav" aria-label="Main navigation"><a href="#top" class="brand"><span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>MINER<span style="color:var(--mint)">.</span></span></a><div class="navlinks"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#video">Video</a><a href="#citation">Citation</a></div><div class="navright"><span class="confpill">WACV 2027</span></div></nav></header>
+  <header class="top"><nav class="container nav" aria-label="Main navigation"><a href="#top" class="brand"><img class="mascot-mark" src="assets/miner-mascot.png" width="38" height="38" alt="" aria-hidden="true" /><span>MINER<span style="color:var(--mint)">.</span></span></a><div class="navlinks"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#weights">Model Weights</a><a href="#video">Video</a><a href="#citation">Citation</a></div><div class="navright"><span class="confpill">WACV 2027</span></div></nav></header>
   <main id="top">
     <section class="hero" aria-labelledby="hero-heading"><div class="container hero-inner"><div class="hero-copy"><div class="eyebrow">Computer vision &nbsp; / &nbsp; WACV 2027</div><h1 id="hero-heading">MINER<span>.</span></h1><p class="hero-title">Modeling Inter- and Intra-Person Variance for Reidentification</p><p class="hero-summary">Recognizing people beyond what they wear. A variance-aware learning framework that puts difficult identity matches and cross-outfit differences at the center of training.</p><div class="hero-authors"><b>Oron Nir</b><span class="dot">✳</span><b>Eliyahu Strugo</b><span class="dot">✳</span><b>Ariel Shamir</b></div><div class="actions"><span class="action pending" id="paper-pending" aria-label="arXiv paper link coming soon">↗ &nbsp; arXiv · coming soon</span><a class="action primary" href="https://github.com/oronnir/MINER" target="_blank" rel="noopener noreferrer" aria-label="View MINER code on GitHub">Code on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="action secondary" href="#video">Watch video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 6 9 6-9 6z"/></svg></a></div><small class="coming-inline">Reichman University &nbsp; · &nbsp; Microsoft &nbsp; · &nbsp; WACV 2027</small></div>
     <div class="hero-art" aria-label="Visual diagram of a MINER training batch"><div class="viz-shell"><div class="viz-head"><strong>Inside a MINER training batch</strong><span class="statusdots"><i></i><i></i><i></i></span></div><div class="identityrow">
@@ -80,6 +125,22 @@
       <div class="person"><svg class="person-avatar" viewBox="0 0 74 84" aria-hidden="true"><circle cx="37" cy="17" r="12" fill="#b98372"/><path d="M23 13Q24 2 38 4Q49 4 50 16" fill="#161f25"/><path d="M13 44Q14 35 26 34L37 41 47 34Q60 35 62 44L66 77H8z" fill="#d9b45b"/><path d="M29 37 37 44 45 37" fill="none" stroke="#f4d896" stroke-width="2"/></svg><small>ID 02 · Outfit B</small></div>
     </div><div class="viz-arrows"><span>HARD POSITIVES</span><span class="line"></span><span>HARD NEGATIVES</span></div><div class="matrixpanel"><div class="matrixhead"><span>Multi-positive contrastive targets</span><em>8 × 8</em></div><div class="blockgrid" id="hero-matrix" aria-label="Block diagonal target matrix"></div></div><div class="viz-foot"><span>Cross-outfit matches within identity blocks</span><span>ACTIVE LEARNING SIGNAL ↗</span></div></div></div></div></section>
     <div class="hero-stats"><div class="container stats-wrap"><div class="stat"><b>6</b><small>CC-ReID benchmarks</small></div><div class="stat"><b>3 / 3</b><small>TVRID podium finishes</small></div><div class="stat"><b>Online</b><small>Adaptive batch allocation</small></div><div class="stat"><b>2027</b><small>WACV presentation</small></div></div></div>
+
+    <!-- Research affiliation marks. CANVAS Lab logo is the exact user-provided SVG, bundled locally in assets/. -->
+    <section class="affiliation-strip" aria-label="Research affiliations">
+      <div class="container affiliation-inner">
+        <div class="affiliation-intro"><span class="affiliation-label">RESEARCH AFFILIATIONS</span><span class="affiliation-hint">Academic &amp; industry collaboration</span></div>
+        <div class="affiliation-logos">
+          <a class="affiliation-affix canvas-affix" href="https://canvas-lab.org/" target="_blank" rel="noopener noreferrer" title="CANVAS Lab — Reichman University">
+            <img src="assets/canvas-lab-logo.svg" alt="CANVAS Lab at Reichman University" loading="lazy" width="112" height="141" />
+          </a>
+          <span class="affiliation-separator" aria-hidden="true"></span>
+          <a class="affiliation-affix microsoft-affix" href="https://www.microsoft.com/" target="_blank" rel="noopener noreferrer" title="Microsoft">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" loading="lazy" width="176" height="38" />
+          </a>
+        </div>
+      </div>
+    </section>
     <section class="section" id="abstract"><div class="container abstract-layout"><div class="abstract-aside"><div class="eyebrow section-label">01 / Abstract</div><h2>Identity is more than appearance.</h2><p>Clothes-changing person re-identification is difficult because the same person can look radically different across outfits, environments, and camera views.</p></div><div class="abstract-copy"><p>Clothes-Changing Person Re-Identification (CC-ReID) remains challenging due to drastic appearance shifts across outfits. Most prior works devise biometric signal-extraction heuristics to enhance inter-person variance, e.g., using segmentation masks, while leaving intra-person variance uncontrolled.</p><p>We present MINER, a simple model-agnostic framework that suppresses garment bias by contrasting hard examples and adaptively balancing dataset-dependent intra- and inter-person variance.</p><p>Extensive experiments show that MINER improves retrieval across CC-ReID benchmarks, achieving competitive performance across six clothes-changing benchmarks and ranking among the leaders in all three tracks of the open TVRID RGB-Depth ReID challenge.</p></div></div></section>
     <section class="section method-section" id="method"><div class="container"><div class="section-header"><div class="eyebrow section-label">02 / The method</div><h2>Train on the differences that matter.</h2><p>MINER couples a stochastic identity–outfit sampler with a multi-positive loss, then automatically allocates a fixed image budget between identities and samples per identity.</p></div><div class="method-grid"><article class="method-card"><div class="method-num">01 — INTER-PERSON</div><h3>Find the look-alikes.</h3><p>Soft-sample visually similar but distinct identities at the centroid level, presenting the model with challenging negatives.</p><span class="method-tag">Hard-negative identity mining</span></article><article class="method-card"><div class="method-num">02 — INTRA-PERSON</div><h3>Change the outfit.</h3><p>Mine dissimilar cross-camera clothing pairs from each identity and align them using block-diagonal, multi-positive contrastive targets.</p><span class="method-tag">Hard-positive outfit mining</span></article><article class="method-card"><div class="method-num">03 — ADAPTIVE CONTROL</div><h3>Balance the batch.</h3><p>Estimate gradient variance online to split the memory budget between the number of identities and examples per identity.</p><span class="method-tag">Closed-form variance controller</span></article></div></div></section>
     <section class="section figure-section" id="figure"><div class="container"><div class="section-header"><div class="eyebrow section-label">03 / How it works</div><h2>One batch. Two complementary pressures.</h2><p>Hard positives align the same identity across changed clothing. Hard negatives distinguish different identities that look alike. The contrastive supervision operates on the full query–gallery matrix.</p></div><div class="figure-frame"><svg viewBox="0 0 1080 365" role="img" aria-label="Schematic: query and gallery pairs feed an encoder, producing a block diagonal multi-positive matching matrix">
@@ -98,20 +159,73 @@
     <section class="section" id="results"><div class="container"><div class="section-header"><div class="eyebrow section-label">04 / Experimental results</div><h2>The best batch is dataset-dependent.</h2><p>The number of identities and cross-outfit samples in a batch must compete for the same memory budget. PRCC and Celeb-L favor remarkably different allocations.</p></div><div class="results-layout"><article class="result-card"><div class="result-hd"><div><h3>PRCC</h3><span>Controlled clothing changes</span></div><b>5 : 17</b></div><svg class="plot-svg" viewBox="0 0 520 275" role="img" aria-label="PRCC allocation tradeoff: best at m 5 n 17"><line x1="55" y1="223" x2="494" y2="223" stroke="#b7c9c2"/><line x1="55" y1="25" x2="55" y2="223" stroke="#b7c9c2"/><text x="274" y="265" text-anchor="middle" font-size="11" fill="#81958f">n · samples per identity (per side)</text><text x="15" y="120" font-size="11" fill="#81958f" transform="rotate(-90 15 120)">m · identities per batch</text><path d="M69 46 C104 112 149 151 195 179 S310 207 479 215" stroke="#91aba4" stroke-width="2" fill="none" stroke-dasharray="6 6"/><path d="M69 42 C104 107 149 146 195 174 S310 202 479 210" stroke="#e4ebdf" stroke-width="16" fill="none" opacity=".4"/>
     <g fill="#f0b987" stroke="#fff" stroke-width="2"><circle cx="68" cy="45" r="6"/><circle cx="85" cy="80" r="6"/><circle cx="109" cy="124" r="6"/><circle cx="137" cy="148" r="6"/><circle cx="164" cy="168" r="6"/><circle cx="237" cy="200" r="6"/><circle cx="335" cy="210" r="6"/><circle cx="476" cy="215" r="6"/></g><circle cx="207" cy="190" r="18" fill="#46a889" opacity=".20"/><circle cx="207" cy="190" r="8" fill="#229f77" stroke="#fff" stroke-width="2"/><path d="M207 179 228 108 304 108" fill="none" stroke="#2d8e74" stroke-width="1.5"/><text x="310" y="107" font-size="12" font-weight="800" fill="#2b8c70">OPTIMAL</text><text x="310" y="122" font-size="11" fill="#81948e">m = 5 · n = 17</text><text x="68" y="238" font-size="11" fill="#8ca29a">2</text><text x="200" y="238" font-size="11" fill="#8ca29a">17</text><text x="471" y="238" font-size="11" fill="#8ca29a">42</text></svg><div class="plot-caption">A larger number of images per identity is preferred for PRCC; the risk-guided controller recovers an allocation near the measured optimum.</div></article>
     <article class="result-card"><div class="result-hd"><div><h3>Celeb-L</h3><span>Unconstrained in-the-wild variation</span></div><b>21 : 4</b></div><svg class="plot-svg" viewBox="0 0 520 275" role="img" aria-label="Celeb-L allocation tradeoff: best at m 21 n 4"><line x1="55" y1="223" x2="494" y2="223" stroke="#b7c9c2"/><line x1="55" y1="25" x2="55" y2="223" stroke="#b7c9c2"/><text x="274" y="265" text-anchor="middle" font-size="11" fill="#81958f">n · samples per identity (per side)</text><text x="15" y="120" font-size="11" fill="#81958f" transform="rotate(-90 15 120)">m · identities per batch</text><path d="M69 46 C104 112 149 151 195 179 S310 207 479 215" stroke="#91aba4" stroke-width="2" fill="none" stroke-dasharray="6 6"/><g fill="#f0b987" stroke="#fff" stroke-width="2"><circle cx="68" cy="45" r="6"/><circle cx="104" cy="108" r="6"/><circle cx="164" cy="168" r="6"/><circle cx="207" cy="190" r="6"/><circle cx="239" cy="199" r="6"/><circle cx="335" cy="210" r="6"/><circle cx="476" cy="215" r="6"/></g><circle cx="97" cy="105" r="18" fill="#46a889" opacity=".20"/><circle cx="97" cy="105" r="8" fill="#229f77" stroke="#fff" stroke-width="2"/><path d="M106 99 150 57 226 57" fill="none" stroke="#2d8e74" stroke-width="1.5"/><text x="230" y="56" font-size="12" font-weight="800" fill="#2b8c70">OPTIMAL</text><text x="230" y="71" font-size="11" fill="#81948e">m = 21 · n = 4</text><text x="68" y="238" font-size="11" fill="#8ca29a">2</text><text x="96" y="238" font-size="11" fill="#8ca29a">4</text><text x="471" y="238" font-size="11" fill="#8ca29a">42</text></svg><div class="plot-caption">In-the-wild identities benefit from a larger identity budget, shifting the best split toward more people and fewer images per person.</div></article></div><p class="result-note">These are explanatory schematics, not redrawings of the underlying measured mAP grid. See Figures 2–3 of the paper for measured values and all evaluated allocations.</p></div></section>
-    <section class="section video-section" id="video"><div class="container video-layout"><div><div class="eyebrow section-label">05 / Video overview</div><h2>See MINER in action.</h2><p>An accessible walkthrough of the motivation, the stochastic mining strategy, multi-positive supervision, and the online variance controller.</p><p id="video-status" style="font-weight:800;color:#2b826b;margin-top:25px">Research video · coming soon</p></div><div class="video-frame" id="video-container"><div class="video-emblem">▶</div><span class="video-label">MINER / RESEARCH OVERVIEW</span></div></div></section>
-    <section class="section cite-section" id="citation"><div class="container"><div class="section-header"><div class="eyebrow section-label">06 / Citation</div><h2>Build on the research.</h2><p>If you use MINER in your research, please cite the WACV 2027 paper.</p></div><div class="cite-box"><button class="copy" id="copy-bib" type="button" aria-label="Copy BibTeX to clipboard">Copy BibTeX ↗</button><pre id="bibtex">@inproceedings{nir2027miner,
+
+    <!-- Downloadable model checkpoints. Edit MODEL_WEIGHTS in the script at the end. -->
+    <section class="section weights-section" id="weights" aria-labelledby="weights-heading">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow section-label">05 / Model weights</div>
+          <h2 id="weights-heading">Run MINER. Reproduce the results.</h2>
+          <p>Pretrained checkpoints for clothes-changing person re-identification. Choose the model corresponding to your evaluation dataset and download its weights.</p>
+        </div>
+        <div class="weights-grid" id="weights-grid" aria-live="polite">
+          <p>Model download links are being prepared.</p>
+        </div>
+        <p class="weights-note">Use the corresponding MINER model architecture and preprocessing configuration. For implementation instructions, see the <a href="https://github.com/oronnir/MINER" target="_blank" rel="noopener noreferrer">code repository ↗</a>. Weights and licenses may be released separately.</p>
+      </div>
+    </section>
+    <section class="section video-section" id="video"><div class="container video-layout"><div><div class="eyebrow section-label">06 / Video overview</div><h2>See MINER in action.</h2><p>An accessible walkthrough of the motivation, the stochastic mining strategy, multi-positive supervision, and the online variance controller.</p><p id="video-status" style="font-weight:800;color:#2b826b;margin-top:25px">Research video · coming soon</p></div><div class="video-frame" id="video-container"><div class="video-emblem">▶</div><span class="video-label">MINER / RESEARCH OVERVIEW</span></div></div></section>
+    <section class="section cite-section" id="citation"><div class="container"><div class="section-header"><div class="eyebrow section-label">07 / Citation</div><h2>Build on the research.</h2><p>If you use MINER in your research, please cite the WACV 2027 paper.</p></div><div class="cite-box"><button class="copy" id="copy-bib" type="button" aria-label="Copy BibTeX to clipboard">Copy BibTeX ↗</button><pre id="bibtex">@inproceedings{nir2027miner,
   title     = {MINER: Modeling Inter- and Intra-Person Variance for Reidentification},
   author    = {Nir, Oron and Strugo, Eliyahu and Shamir, Ariel},
   booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
   year      = {2027}
 }</pre></div></div></section>
   </main>
-  <footer class="foot"><div class="container foot-inner"><div><a href="#top" class="brand"><span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>MINER<span style="color:var(--mint)">.</span></a><p style="margin-top:12px">© 2027 MINER research team · Oron Nir, Eliyahu Strugo, Ariel Shamir</p></div><div class="foot-links"><a href="https://github.com/oronnir/MINER" rel="noopener noreferrer" target="_blank">GitHub ↗</a><a href="#abstract">Paper</a><a href="#top">Back to top ↑</a></div></div></footer>
+  <footer class="foot"><div class="container foot-inner"><div><a href="#top" class="brand"><img class="mascot-mark" src="assets/miner-mascot.png" width="38" height="38" alt="" aria-hidden="true" />MINER<span style="color:var(--mint)">.</span></a><p style="margin-top:12px">© 2027 MINER research team · Oron Nir, Eliyahu Strugo, Ariel Shamir</p></div><div class="foot-links"><a href="https://github.com/oronnir/MINER" rel="noopener noreferrer" target="_blank">GitHub ↗</a><a href="#abstract">Paper</a><a href="#top">Back to top ↑</a></div></div></footer>
   <script>
     // Add the published links here. Leave blank until the links are publicly available.
     const PAPER_URL = '';
     const YOUTUBE_URL = '';
     
+
+    // Model weights: edit the names and paste direct download URLs when ready.
+    // Examples use five paper datasets as labels; replace them with your actual checkpoints.
+    // Host large .pth / .pt / .safetensors files on GitHub Releases or Hugging Face,
+    // not inside the docs/ folder used by GitHub Pages.
+    const MODEL_WEIGHTS = [
+      { name: 'PRCC',        note: 'Clothes-changing person re-identification', file: '', url: '' },
+      { name: 'LTCC',        note: 'Long-term clothes-changing ReID',          file: '', url: '' },
+      { name: 'Celeb-L',     note: 'In-the-wild clothing changes',            file: '', url: '' },
+      { name: 'DeepChange',  note: 'Long-term appearance changes',            file: '', url: '' },
+      { name: 'LaST',        note: 'Large-scale long-term re-identification', file: '', url: '' }
+    ];
+    // Safe DOM construction: checkpoint labels never become executable HTML.
+    const weightsGrid = document.getElementById('weights-grid');
+    weightsGrid.replaceChildren();
+    MODEL_WEIGHTS.forEach((model, index) => {
+      const card = document.createElement('article'); card.className = 'weight-card';
+      const header = document.createElement('div'); header.className = 'weight-card-header';
+      const icon = document.createElement('span'); icon.className = 'weight-card-icon'; icon.setAttribute('aria-hidden','true'); icon.textContent = '⬡';
+      const indexLabel = document.createElement('span'); indexLabel.className = 'weight-card-index'; indexLabel.textContent = 'CHECKPOINT ' + String(index + 1).padStart(2,'0');
+      header.append(icon,indexLabel);
+      const title = document.createElement('h3'); title.textContent = model.name;
+      const desc = document.createElement('p'); desc.className = 'weight-description'; desc.textContent = model.note || 'MINER model checkpoint';
+      const meta = document.createElement('div'); meta.className = 'weight-meta'; meta.textContent = model.file || 'Checkpoint filename to be announced';
+      let action;
+      if (model.url && /^https:\/\//i.test(model.url)) {
+        action = document.createElement('a'); action.className = 'weight-link'; action.href = model.url;
+        action.target = '_blank'; action.rel = 'noopener noreferrer';
+        action.textContent = 'Download weights ↗';
+        action.setAttribute('aria-label', 'Download ' + model.name + ' model weights');
+      } else {
+        action = document.createElement('span'); action.className = 'weight-link pending';
+        action.textContent = 'Download coming soon';
+      }
+      card.append(header,title,desc,meta,action);
+      weightsGrid.append(card);
+    });
+
     const grid = document.getElementById('hero-matrix');
     for(let y=0;y<8;y++){for(let x=0;x<8;x++){const c=document.createElement('span');c.className='cell'+(Math.floor(y/2)===Math.floor(x/2)?' on':'');grid.appendChild(c)}}
     const ns='http://www.w3.org/2000/svg', matrix=document.getElementById('method-svg-matrix');
