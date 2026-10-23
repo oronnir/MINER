@@ -32,6 +32,31 @@ nav{position:sticky;top:0;z-index:15;background:rgba(7,28,33,.96);color:#eaf8ef;
 @media(max-width:980px){.hero-main,.method-copy,.citation-inner{grid-template-columns:1fr}.hero-main{gap:42px}.pair-grid,.summary-strip,.plot-grid,.controller-grid{grid-template-columns:1fr}.controller-grid{gap:12px}.tradeoff-strip{grid-template-columns:1fr;gap:10px}.balance-mark{display:none}.method-copy{gap:30px}.summary-strip{margin-bottom:14px}}
 @media(max-width:650px){.container{width:calc(100% - 36px)}.nav-inner{min-height:65px}.navlinks{display:none}.hero-main{padding:48px 0 62px}.hero h1{font-size:78px}.hero .paper-title{font-size:23px}.hero .sub{font-size:14px}.affiliations-inner{flex-wrap:wrap;justify-content:center;gap:0;padding:17px 0}.affiliations-logos{justify-content:center;flex:1 1 100%;gap:16px}.affiliations small{margin-bottom:0}.affiliations-logos img.canvas{height:75px;width:80px}.affiliations-logos img.microsoft{width:126px}.section{padding:65px 0}.pair-row{grid-template-columns:1fr}.connector{padding:2px 0}.weight-row{grid-template-columns:1fr auto;gap:6px 14px}.weight-row .desc{grid-column:1 / -1;grid-row:2}.weight-row a,.weight-row .coming{grid-column:2;grid-row:1}.footer-inner{flex-direction:column;align-items:start}.result-focus{align-items:start;flex-direction:column;gap:8px}.panel-head,.mining-panel .content,.controller-body,.plot-panel,.summary-card,.trade-box,.control-box{padding-left:18px;padding-right:18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+/* CCTV examples: only the hard-example mining panel is restyled.
+   Images are generated illustrations, not real surveillance recordings. */
+.mining-panel .pair-box{background:#f9fcfa;border-color:#d4e5db;padding:19px 18px 20px}
+.mining-panel .pair-box.negative{background:#fdfcf9}
+.mining-panel .pair-label{margin-bottom:19px}
+.mining-panel .pair-label strong{font-size:19px}
+.mining-panel .pair-label span{color:#678679;font-size:10px;letter-spacing:.07em;text-align:right}
+.mining-panel .pair-box.positive .pair-label strong{color:#07806b}
+.mining-panel .pair-box.negative .pair-label strong{color:#a76240}
+.mining-panel .cctv-row{grid-template-columns:minmax(0,1fr) minmax(70px,auto) minmax(0,1fr);gap:8px;align-items:center}
+.mining-panel .cctv-shot{display:block;min-width:0;width:100%;aspect-ratio:1.03;object-fit:cover;border-radius:10px;background:#cbd4d0}
+.mining-panel .connector{max-width:106px;font-size:12px;line-height:1.5;white-space:normal}
+.mining-panel .same{color:#53bfa0}
+.mining-panel .similar{color:#e3a27d}
+.mining-panel .pair-note{margin-top:17px;font-size:12.5px;line-height:1.8}
+.mining-panel .mining-foot{margin-top:22px;padding-top:19px}
+@media(max-width:650px){
+  .mining-panel .cctv-row{grid-template-columns:minmax(0,1fr) minmax(54px,auto) minmax(0,1fr);gap:6px}
+  .mining-panel .pair-box{padding:16px 12px}
+  .mining-panel .pair-label{flex-wrap:wrap;gap:5px}
+  .mining-panel .pair-label span{text-align:left}
+  .mining-panel .connector{font-size:10px;max-width:75px}
+  .mining-panel .cctv-shot{border-radius:7px}
+}
 </style></head>
 <body>
 <nav><div class="container nav-inner"><a class="brand" href="#top"><img src="assets/miner-mascot.png" width="34" height="34" alt="" aria-hidden="true"/> MINER<b>.</b></a><div class="navlinks"><a href="#video">Video</a><a href="#method">Method</a><a href="#analysis">Controller</a><a href="#weights">Weights</a><a href="#citation">Citation</a></div><span class="pill">WACV 2027</span></div></nav>
@@ -40,41 +65,25 @@ nav{position:sticky;top:0;z-index:15;background:rgba(7,28,33,.96);color:#eaf8ef;
 <section class="affiliations" aria-label="Research affiliations"><div class="container affiliations-inner"><small>Research affiliations</small><div class="affiliations-logos"><a href="https://canvas-lab.org/" target="_blank" rel="noopener noreferrer" aria-label="CANVAS Lab at Reichman University"><img class="canvas" src="assets/canvas-lab-logo.svg" alt="CANVAS Lab" width="83" height="88" /></a><span class="sep" aria-hidden="true"></span><a href="https://www.microsoft.com/" target="_blank" rel="noopener noreferrer" aria-label="Microsoft"><img class="microsoft" src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" width="145" height="29" /></a></div></div></section>
 <section class="section" id="method"><div class="container"><div class="method-copy"><div><div class="eyebrow">01 / The idea</div><h2>Learn from the cases that make ReID fail.</h2></div><div class="abstract"><div class="eyebrow" style="margin-bottom:11px;font-size:10px">Abstract</div><p>Clothes-changing person re-identification must match people across cameras despite drastic outfit changes. MINER focuses training on visually similar <strong>different people</strong> and visually dissimilar <strong>outfits of the same person</strong>.</p><p>It samples these hard cases stochastically at the centroid level, then applies a symmetric multi-positive contrastive loss. The main novelty is an <strong>online Variance Controller</strong> that adapts the number of identities and examples per identity from the estimated balance between discrimination and invariance errors.</p></div></div>
 <article class="panel mining-panel">
-  <div class="panel-head"><span>Hard example mining</span><span>EFFECTIVE IMAGE BATCH SELECTION FOR IDENTITY REPRESENTATATION</span></div>
+  <div class="panel-head"><span>Hard example mining</span><span>Effective image batch selection for identity representation</span></div>
   <div class="content">
     <p class="mining-topline">MINER deliberately fills each batch with two complementary signals: <strong>hard positives</strong> (same person, different outfits) to improve invariance, and <strong>hard negatives</strong> (different people, similar appearance) to improve discrimination.</p>
     <div class="pair-grid">
       <section class="pair-box positive" aria-label="Hard positive example">
         <div class="pair-label"><strong>Hard positive</strong><span>same identity · different clothes</span></div>
-        <div class="pair-row">
-          <div class="person-card" style="--skin:#efc09a;--hair:#1b2430;--cloth:#91e0c4">
-            <span class="cam-tag">Cam A</span>
-            <div class="portrait"><div class="head-shape"></div><div class="hair-shape"></div><div class="body-shape"></div><div class="strap left"></div><div class="strap right"></div></div>
-            <b>ID 01</b><small>Outfit A</small>
-          </div>
+        <div class="pair-row cctv-row">
+          <img class="cctv-shot" src="assets/hard-positive-outfit-a.webp" alt="Synthetic CCTV-style illustration of an adult walking in a black jacket, outfit A of identity 01" loading="lazy" decoding="async" width="300" height="296" />
           <div class="connector"><span class="same">↔ same person</span></div>
-          <div class="person-card" style="--skin:#efc09a;--hair:#1b2430;--cloth:#e2a17c">
-            <span class="cam-tag">Cam C</span>
-            <div class="portrait"><div class="head-shape"></div><div class="hair-shape"></div><div class="body-shape"></div><div class="strap left"></div><div class="strap right"></div></div>
-            <b>ID 01</b><small>Outfit B</small>
-          </div>
+          <img class="cctv-shot" src="assets/hard-positive-outfit-b.webp" alt="Synthetic CCTV-style illustration of the same adult wearing a light hoodie, outfit B of identity 01" loading="lazy" decoding="async" width="303" height="296" />
         </div>
         <p class="pair-note">These cross-outfit matches are intentionally <strong>visually far apart</strong>, so the encoder learns to keep identity stable across clothing changes.</p>
       </section>
       <section class="pair-box negative" aria-label="Hard negative example">
         <div class="pair-label"><strong>Hard negative</strong><span>different identities · similar appearance</span></div>
-        <div class="pair-row">
-          <div class="person-card" style="--skin:#efc09a;--hair:#1b2430;--cloth:#91e0c4">
-            <span class="cam-tag">Cam A</span>
-            <div class="portrait"><div class="head-shape"></div><div class="hair-shape"></div><div class="body-shape"></div><div class="strap left"></div><div class="strap right"></div></div>
-            <b>ID 01</b><small>Anchor</small>
-          </div>
+        <div class="pair-row cctv-row">
+          <img class="cctv-shot" src="assets/hard-negative-person-a.webp" alt="Synthetic CCTV-style illustration of person 01 wearing dark clothes" loading="lazy" decoding="async" width="305" height="296" />
           <div class="connector"><span class="similar">≈ look-alike</span></div>
-          <div class="person-card" style="--skin:#d5a381;--hair:#23262d;--cloth:#9bb3ea">
-            <span class="cam-tag">Cam C</span>
-            <div class="portrait"><div class="head-shape"></div><div class="hair-shape"></div><div class="body-shape"></div><div class="strap left"></div><div class="strap right"></div></div>
-            <b>ID 02</b><small>Similar build / pose</small>
-          </div>
+          <img class="cctv-shot" src="assets/hard-negative-person-b.webp" alt="Synthetic CCTV-style illustration of a different adult wearing a similar dark outfit" loading="lazy" decoding="async" width="269" height="296" />
         </div>
         <p class="pair-note">These identities are intentionally <strong>visually close</strong>, so the encoder learns to separate people even when clothing and overall appearance are misleading.</p>
       </section>
