@@ -128,7 +128,7 @@ subject to 2mn = B_max</span>
         <p>The controller solves for the new allocation in <strong>closed form</strong> under the fixed memory budget.</p>
         <span class="formula">m* = √(B_max · tr Σ_B / tr Σ_W)
  n* = √(B_max · tr Σ_W / 4 tr Σ_B)</span>
-        <div class="badges"><span class="badge">No RL</span><span class="badge">No multi-armed bandit</span><span class="badge">No extra learner</span></div>
+        <div class="badges"><span class="badge">No Grid-Search</span><span class="badge">No RL</span><span class="badge">No multi-armed bandit</span><span class="badge">No extra learner</span></div>
       </div>
     </div>
     <div class="controller-note"><b>Why this matters:</b> MINER does not balance these tradeoffs with an additional learning policy. It estimates the two variance terms online and updates the allocation directly, which keeps the controller lightweight, interpretable, and easy to reproduce.</div>
@@ -139,7 +139,7 @@ subject to 2mn = B_max</span>
 <div class="summary-strip">
   <article class="summary-card"><strong>Invariance-driven regime</strong><p>When the within-person term dominates, the model benefits from <strong>more samples per identity</strong> to better connect outfit changes.</p><code>smaller ρ  →  larger n</code></article>
   <article class="summary-card"><strong>Discrimination-driven regime</strong><p>When the between-person term dominates, the model benefits from <strong>more identities per batch</strong> to sharpen separation.</p><code>larger ρ  →  larger m</code></article>
-  <article class="summary-card highlight"><strong>Controller takeaway</strong><p>The controller is analytic: estimate the two variance terms, compute ρ, and update m:n under the batch budget.</p><code>No RL · No bandit policy · No extra optimization loop</code></article>
+  <article class="summary-card highlight"><strong>Controller takeaway</strong><p>The controller is analytic: estimate the two variance terms, compute ρ, and update m:n under the batch budget.</p><code>No Grid-Search · No RL · No bandit policy · No extra optimization loop</code></article>
 </div>
 <div class="plot-grid"><article class="plot-panel"><div class="plot-head"><div><span>Dataset 01</span><h3>PRCC</h3></div><div class="peak"><strong>5 : 17</strong><small>m identities : n samples</small></div></div><p class="statement">More examples per person, fewer identities.</p>
 <svg class="chart" viewBox="0 0 520 270" role="img" aria-label="PRCC: measured mAP across nine fixed batch allocations from Table 10. Best at 5 identities per batch.">
