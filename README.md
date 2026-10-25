@@ -9,6 +9,9 @@ Extensive experiments show that controlled simultaneous intra- and inter-person 
 We further demonstrate the importance of balancing these factors, which vary with the dataset priors.
 
 
+# Note: The main paper's code is coming up soon!
+For now we share a piece of code that helped us submit MINER to the TVRID open challenge. Coming up soon is the full version, including the variance controller code. We base our codebase on excellent prior works like MADE and DIFFER.
+
 # MINER Pipeline for ICPR 2026 TVRID RGB-RGB Track
 
 ## Step 0: Pre-compute Embeddings (one-time)
